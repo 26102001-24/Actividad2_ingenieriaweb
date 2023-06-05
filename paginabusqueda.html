@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Búsqueda de Restaurantes</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    /* Estilos adicionales */
+    .restaurant {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Búsqueda de Restaurantes</h1>
+    <div class="input-group mb-3">
+      <input type="text" id="search-input" class="form-control" placeholder="Buscar por nombre">
+      <div class="input-group-append">
+        <button id="search-button" class="btn btn-primary">Buscar</button>
+      </div>
+    </div>
+    <div id="search-results">
+      <!-- Aquí se mostrarán los resultados de la búsqueda -->
+   
+    </div>
+  </div>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
+    // Función para filtrar los resultados de búsqueda
+    function filterResults() {
+      var searchInput = document.getElementById('search-input');
+      var searchText = searchInput.value.toLowerCase();
+      var restaurants = document.getElementsByClassName('restaurant');
+
+      for (var i = 0; i < restaurants.length; i++) {
+        var restaurantName = restaurants[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+        var restaurantDescription = restaurants[i].getElementsByTagName('p')[0].innerText.toLowerCase();
+
+        if (restaurantName.includes(searchText) || restaurantDescription.includes(searchText)) {
+          restaurants[i].style.display = 'block';
+        } else {
+          restaurants[i].style.display = 'none';
+        }
+      }
+    }
+
+    // Evento de click en el botón de búsqueda
+    var searchButton = document.getElementById('search-button');
+    searchButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      filterResults();
+    });
+  </script>
+</body>
+</html>
